@@ -1,0 +1,28 @@
+{
+  "name": "jsdoc-vue-api",
+  "version": "1.0.0",
+  "description": "jsdoc vue api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BadWaka/jsdoc-vue-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BadWaka/jsdoc-vue-api/issues"
+  },
+  "homepage": "https://github.com/BadWaka/jsdoc-vue-api#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.3.1",
+    "jsdoc-api": "^4.0.3",
+    "vue-template-compiler": "^2.6.6"
+  }
+}
