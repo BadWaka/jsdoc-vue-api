@@ -55,11 +55,11 @@ const parseVue = (filePath) => {
 
     // 得到最后输出的对象
     let docObj = getDocObj(jsObj, jsdocObj);
-    fs.writeFile('./test/docObj.json', JSON.stringify(docObj), (err) => {
-        if (err) {
-            console.log('err', err);
-        }
-    });
+    // fs.writeFile('./test/docObj.json', JSON.stringify(docObj), (err) => {
+    //     if (err) {
+    //         console.log('err', err);
+    //     }
+    // });
 
     return docObj;
 };
