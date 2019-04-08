@@ -87,8 +87,9 @@ export default {
              *
              * @event touchstart
              * @property {Event} e 事件对象
+             * @property {string} str 字符串
              */
-            this.$emit('touchstart', e);
+            this.$emit('touchstart', e, '123');
         }
     }
 }

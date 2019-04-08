@@ -55,11 +55,11 @@ const parseVue = (filePath) => {
 
     // 得到最后输出的对象
     let docObj = getDocObj(jsObj, jsdocObj);
-    // fs.writeFile('./test/docObj.json', JSON.stringify(docObj), (err) => {
-    //     if (err) {
-    //         console.log('err', err);
-    //     }
-    // });
+    fs.writeFile('./test/docObj.json', JSON.stringify(docObj), (err) => {
+        if (err) {
+            console.log('err', err);
+        }
+    });
 
     return docObj;
 };
@@ -77,7 +77,56 @@ const writeMD = (docObj, dirPath) => {
     console.log('dirPath', dirPath);
 
     let mdPath = `${dirPath}/README.md`;
-    let mdContent = '## API\naaa';
+    let mdContent = '## API\n';
+
+    // Props
+    if (docObj.props) {
+        mdContent += '\n### Props\n\n';
+        mdContent += '名称 | 类型 | 默认值 | 是否必选 | 描述 | 其他\n';
+        mdContent += '--- | --- | --- | --- | --- | ---\n';
+        for (let key in docObj.props) {
+            let prop = docObj.props[key];
+            mdContent += `${key} | ${prop.type} | ${prop.defaultValue || ''} | ${prop.required ? '是' : '否'} | ${prop.description} | ---\n`;
+            // 判断每个 prop 是否有 properties 属性
+            if (prop.properties) {
+                prop.properties.forEach((propertie, propertieIndex) => {
+                    mdContent += `>> ${propertie.name} | ${propertie.type} | ${propertie.defaultvalue || ''} | ${propertie.required ? '是' : '否'} | ${propertie.description} | ---\n`;
+                });
+            }
+        }
+    }
+
+    // Events
+    if (docObj.events) {
+        mdContent += '\n### Events\n';
+        for (let key in docObj.events) {
+            let event = docObj.events[key];
+            mdContent += `\n**${key}**: ${event.description}\n\n`;
+            if (event.properties) {
+                mdContent += `名称 | 类型 | 描述\n`;
+                mdContent += `--- | --- | ---\n`;
+                event.properties.forEach((propertie, propertieIndex) => {
+                    mdContent += `${propertie.name} | ${propertie.type} | ${propertie.description}\n`;
+                });
+            }
+        }
+    }
+
+    // Methods
+    if (docObj.methods) {
+        mdContent += '\n### Methods\n';
+        for (let key in docObj.methods) {
+            let method = docObj.methods[key];
+            mdContent += `\n**${key}**: ${method.description}\n\n`;
+            if (method.params) {
+                mdContent += `名称 | 类型 | 描述\n`;
+                mdContent += `--- | --- | ---\n`;
+                method.params.forEach((param, paramIndex) => {
+                    mdContent += `${param.name} | ${param.type} | ${param.description}\n`;
+                });
+            }
+        }
+    }
 
     fs.readFile(mdPath, 'utf8', (err, data) => {
         // 文件不存在
@@ -88,6 +137,7 @@ const writeMD = (docObj, dirPath) => {
         }
         // 文件存在
         else {
+            // 每次会重新覆盖掉 ## API 以下的部分
             let index = data.indexOf('## API');
             fs.truncate(mdPath, index, (err) => {
                 if (!err) {
