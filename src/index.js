@@ -157,6 +157,6 @@ module.exports = {
     parseVue
 };
 
-let test = '../test/test.vue';
-let docObj = parseVue(test);
-writeMD(docObj, '../test');
+// let test = '../test/test.vue';
+// let docObj = parseVue(test);
+// writeMD(docObj, '../test');
