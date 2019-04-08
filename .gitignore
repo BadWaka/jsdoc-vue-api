@@ -3,3 +3,4 @@ node_modules/
 .vscode
 amd_modules/
 amd-lock.json
+package-lock.json

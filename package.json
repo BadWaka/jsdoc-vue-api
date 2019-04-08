@@ -1,6 +1,6 @@
 {
   "name": "jsdoc-vue-api",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "jsdoc vue api",
   "main": "src/index.js",
   "scripts": {
@@ -23,6 +23,6 @@
     "@babel/core": "^7.3.3",
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.1",
-    "vue-template-compiler": "^2.6.6"
+    "vue-template-compiler": "^2.5.21"
   }
 }
