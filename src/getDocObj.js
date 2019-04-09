@@ -15,7 +15,11 @@ const getDocObj = (jsObj, jsdocObj) => {
 
             // props
             if (commentItem.memberof === 'module.exports.props') {
-                let metaCodeValue = JSON.parse(commentItem.meta.code.value);
+                // console.log('commentItem.meta.code', commentItem.meta.code);
+                let metaCodeValue = commentItem.meta.code.value;
+                if (typeof commentItem.meta.code.value === 'object') {
+                    metaCodeValue = JSON.parse(commentItem.meta.code.value);
+                }
                 // 获取默认值
                 let defaultValue = metaCodeValue.default;
                 // 获取是否必须

@@ -2,8 +2,6 @@
 
 require("core-js/modules/es6.regexp.replace");
 
-require("core-js/modules/web.dom.iterable");
-
 const getDocObj = (jsObj, jsdocObj) => {
   // console.log('getProps jsObj', jsObj, 'jsdocObj', jsdocObj);
   let docObj = {

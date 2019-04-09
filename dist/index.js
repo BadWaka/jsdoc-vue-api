@@ -1,7 +1,5 @@
 "use strict";
 
-require("core-js/modules/web.dom.iterable");
-
 const jsdocApi = require('jsdoc-api');
 
 const fs = require('fs');
@@ -78,7 +76,7 @@ const writeMD = (docObj, dirPath) => {
   // 转换成绝对路径
   dirPath = path.resolve(__dirname, dirPath);
   console.log('dirPath', dirPath);
-  let mdPath = `${dirPath}/README.md`;
+  let mdPath = "".concat(dirPath, "/README.md");
   let mdContent = '## API\n'; // Props
 
   if (docObj.props) {
@@ -88,11 +86,11 @@ const writeMD = (docObj, dirPath) => {
 
     for (let key in docObj.props) {
       let prop = docObj.props[key];
-      mdContent += `${key} | ${prop.type} | ${prop.defaultValue || ''} | ${prop.required ? '是' : '否'} | ${prop.description} | ---\n`; // 判断每个 prop 是否有 properties 属性
+      mdContent += "".concat(key, " | ").concat(prop.type, " | ").concat(prop.defaultValue || '', " | ").concat(prop.required ? '是' : '否', " | ").concat(prop.description, " | ---\n"); // 判断每个 prop 是否有 properties 属性
 
       if (prop.properties) {
         prop.properties.forEach((propertie, propertieIndex) => {
-          mdContent += `>> ${propertie.name} | ${propertie.type} | ${propertie.defaultvalue || ''} | ${propertie.required ? '是' : '否'} | ${propertie.description} | ---\n`;
+          mdContent += ">> ".concat(propertie.name, " | ").concat(propertie.type, " | ").concat(propertie.defaultvalue || '', " | ").concat(propertie.required ? '是' : '否', " | ").concat(propertie.description, " | ---\n");
         });
       }
     }
@@ -104,13 +102,13 @@ const writeMD = (docObj, dirPath) => {
 
     for (let key in docObj.events) {
       let event = docObj.events[key];
-      mdContent += `\n**${key}**: ${event.description}\n\n`;
+      mdContent += "\n**".concat(key, "**: ").concat(event.description, "\n\n");
 
       if (event.properties) {
-        mdContent += `名称 | 类型 | 描述\n`;
-        mdContent += `--- | --- | ---\n`;
+        mdContent += "\u540D\u79F0 | \u7C7B\u578B | \u63CF\u8FF0\n";
+        mdContent += "--- | --- | ---\n";
         event.properties.forEach((propertie, propertieIndex) => {
-          mdContent += `${propertie.name} | ${propertie.type} | ${propertie.description}\n`;
+          mdContent += "".concat(propertie.name, " | ").concat(propertie.type, " | ").concat(propertie.description, "\n");
         });
       }
     }
@@ -122,13 +120,13 @@ const writeMD = (docObj, dirPath) => {
 
     for (let key in docObj.methods) {
       let method = docObj.methods[key];
-      mdContent += `\n**${key}**: ${method.description}\n\n`;
+      mdContent += "\n**".concat(key, "**: ").concat(method.description, "\n\n");
 
       if (method.params) {
-        mdContent += `名称 | 类型 | 描述\n`;
-        mdContent += `--- | --- | ---\n`;
+        mdContent += "\u540D\u79F0 | \u7C7B\u578B | \u63CF\u8FF0\n";
+        mdContent += "--- | --- | ---\n";
         method.params.forEach((param, paramIndex) => {
-          mdContent += `${param.name} | ${param.type} | ${param.description}\n`;
+          mdContent += "".concat(param.name, " | ").concat(param.type, " | ").concat(param.description, "\n");
         });
       }
     }
@@ -159,7 +157,8 @@ const writeMD = (docObj, dirPath) => {
 };
 
 module.exports = {
-  parseVue
+  parseVue,
+  writeMD
 }; // let test = '../test/test.vue';
 // let docObj = parseVue(test);
 // writeMD(docObj, '../test');

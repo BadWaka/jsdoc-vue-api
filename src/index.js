@@ -36,6 +36,8 @@ const parseVue = (filePath) => {
     // sfcObj.styles 样式
 
     // 用 eval 执行 js 部分，得到 js 对象
+    sfcObj.script.content = sfcObj.script.content.replace(/import /g, '// import ');
+    sfcObj.script.content = sfcObj.script.content.replace(/'c-/g, '//\'c-');
     let jsObj = eval(babel.transformSync(sfcObj.script.content).code);
     // fs.writeFile('./test/jsObj.json', JSON.stringify(jsObj), (err) => {
     //     if (err) {
@@ -77,7 +79,7 @@ const writeMD = (docObj, dirPath) => {
     console.log('dirPath', dirPath);
 
     let mdPath = `${dirPath}/README.md`;
-    let mdContent = '## API\n';
+    let mdContent = '\n\n----------\n\n\n\n## API\n';
 
     // Props
     if (docObj.props) {
@@ -130,31 +132,41 @@ const writeMD = (docObj, dirPath) => {
 
     fs.readFile(mdPath, 'utf8', (err, data) => {
         // 文件不存在
-        if (err) {
+        // if (err) {
             fs.writeFile(mdPath, mdContent, 'utf8', () => {
                 console.log('没有 README.md，写入成功');
             });
-        }
+        // }
         // 文件存在
-        else {
-            // 每次会重新覆盖掉 ## API 以下的部分
-            let index = data.indexOf('## API');
-            fs.truncate(mdPath, index, (err) => {
-                if (!err) {
-                    console.log('删除成功');
-                }
-                // 追加文件
-                fs.appendFile(mdPath, mdContent, 'utf8', () => {
-                    console.log('有 README.md，写入成功');
-                });
-            });
-        }
+        // else {
+        //     // 每次会重新覆盖掉 ## API 以下的部分
+        //     let index = data.indexOf('----------');
+        //     console.log('index', index, 'data', data.charAt(index));
+        //     if (index === -1) {
+        //         // 追加文件
+        //         fs.appendFile(mdPath, mdContent, 'utf8', () => {
+        //             console.log('有 README.md，写入成功');
+        //         });
+        //     }
+        //     else {
+        //         fs.truncate(mdPath, index + 100, (err) => {
+        //             if (!err) {
+        //                 console.log('删除成功');
+        //             }
+        //             // 追加文件
+        //             // fs.appendFile(mdPath, mdContent, 'utf8', () => {
+        //             //     console.log('有 README.md，写入成功');
+        //             // });
+        //         });
+        //     }
+        // }
     });
 
 };
 
 module.exports = {
-    parseVue
+    parseVue,
+    writeMD
 };
 
 // let test = '../test/test.vue';
