@@ -23,6 +23,7 @@
   "dependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.4",
+    "chalk": "^2.4.2",
     "jsdoc-api": "^4.0.3",
     "vue-template-compiler": "^2.6.10"
   }
