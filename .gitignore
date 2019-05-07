@@ -5,3 +5,4 @@ amd_modules/
 amd-lock.json
 package-lock.json
 dist
+test/README.md
