@@ -13,7 +13,7 @@ if (!vueFilePath) {
     throw "I need .vue file!"
 }
 // 得到绝对路径
-vueFilePath = path.resolve(__dirname, vueFilePath);
+vueFilePath = path.resolve(process.cwd(), vueFilePath);
 console.log('vueFilePath', vueFilePath);
 
 /**
@@ -24,7 +24,7 @@ let readmeDirPath = process.argv[3];
 if (!readmeDirPath) {
     readmeDirPath = path.dirname(vueFilePath)
 }
-readmeDirPath = path.resolve(__dirname, readmeDirPath);
+readmeDirPath = path.resolve(process.cwd(), readmeDirPath);
 console.log('readmeDirPath', readmeDirPath);
 
 // 得到文档数据对象
