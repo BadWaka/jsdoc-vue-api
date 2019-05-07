@@ -39,29 +39,29 @@ const parseVue = (filePath) => {
     sfcObj.script.content = sfcObj.script.content.replace(/import /g, '// import ');
     sfcObj.script.content = sfcObj.script.content.replace(/'c-/g, '//\'c-');
     let jsObj = eval(babel.transformSync(sfcObj.script.content).code);
-    // fs.writeFile('./test/jsObj.json', JSON.stringify(jsObj), (err) => {
-    //     if (err) {
-    //         console.log('err', err);
-    //     }
-    // });
+    fs.writeFile('./test/jsObj.json', JSON.stringify(jsObj), (err) => {
+        if (err) {
+            console.log('err', err);
+        }
+    });
 
     // 用 jsdoc-api 解析，得到 jsdoc 解析结果对象
     let jsdocObj = jsdocApi.explainSync({
         source: sfcObj.script.content
     });
-    // fs.writeFile('./test/jsdocObj.json', JSON.stringify(jsdocObj), (err) => {
-    //     if (err) {
-    //         console.log('err', err);
-    //     }
-    // });
+    fs.writeFile('./test/jsdocObj.json', JSON.stringify(jsdocObj), (err) => {
+        if (err) {
+            console.log('err', err);
+        }
+    });
 
     // 得到最后输出的对象
     let docObj = getDocObj(jsObj, jsdocObj);
-    // fs.writeFile('./test/docObj.json', JSON.stringify(docObj), (err) => {
-    //     if (err) {
-    //         console.log('err', err);
-    //     }
-    // });
+    fs.writeFile('./test/docObj.json', JSON.stringify(docObj), (err) => {
+        if (err) {
+            console.log('err', err);
+        }
+    });
 
     return docObj;
 };
@@ -169,6 +169,6 @@ module.exports = {
     writeMD
 };
 
-// let test = '../test/test.vue';
-// let docObj = parseVue(test);
-// writeMD(docObj, '../test');
+let test = '../test/test.vue';
+let docObj = parseVue(test);
+writeMD(docObj, '../test');

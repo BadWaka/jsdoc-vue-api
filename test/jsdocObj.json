@@ -1,8 +1,8 @@
 [{
     "comment": "",
     "meta": {
-        "range": [1, 1462],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "range": [1, 1511],
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 2,
         "columnno": 0,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -22,7 +22,7 @@
     "comment": "",
     "meta": {
         "range": [22, 509],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 3,
         "columnno": 4,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -43,7 +43,7 @@
     "comment": "/**\n         * 选项数组\n         *\n         * @property {string} str='aaa' 测试字符串\n         */",
     "meta": {
         "range": [136, 180],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 9,
         "columnno": 8,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -72,7 +72,7 @@
     "comment": "",
     "meta": {
         "range": [159, 170],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 10,
         "columnno": 12,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -93,7 +93,7 @@
     "comment": "/**\n         * 测试属性1\n         */",
     "meta": {
         "range": [231, 338],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 15,
         "columnno": 8,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -114,7 +114,7 @@
     "comment": "",
     "meta": {
         "range": [252, 264],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 16,
         "columnno": 12,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -135,7 +135,7 @@
     "comment": "",
     "meta": {
         "range": [278, 300],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 17,
         "columnno": 12,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -156,7 +156,7 @@
     "comment": "",
     "meta": {
         "range": [314, 328],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 18,
         "columnno": 12,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -177,7 +177,7 @@
     "comment": "/**\n         * 需要被被忽略的属性\n         *\n         * @ignore\n         */",
     "meta": {
         "range": [423, 503],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 25,
         "columnno": 8,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -199,7 +199,7 @@
     "comment": "",
     "meta": {
         "range": [444, 456],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 26,
         "columnno": 12,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -220,7 +220,7 @@
     "comment": "",
     "meta": {
         "range": [470, 493],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 27,
         "columnno": 12,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -241,7 +241,7 @@
     "comment": "",
     "meta": {
         "range": [515, 556],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 30,
         "columnno": 4,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -261,7 +261,7 @@
     "comment": "",
     "meta": {
         "range": [562, 579],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 34,
         "columnno": 4,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -280,8 +280,8 @@
 }, {
     "comment": "",
     "meta": {
-        "range": [585, 1460],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "range": [585, 1509],
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 36,
         "columnno": 4,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -302,7 +302,7 @@
     "comment": "/**\n         * 测试方法1\n         *\n         * @param {string} a 参数a\n         * @param {number} b 参数b\n         * @param {boolean} c 参数c\n         * @return {number} res 结果\n         */",
     "meta": {
         "range": [791, 839],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 45,
         "columnno": 8,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -347,7 +347,7 @@
     "comment": "/**\n         * 测试方法2\n         *\n         * @param {string} d 参数d\n         * @param {number} e 参数e\n         * @param {boolean} f 参数f\n         */",
     "meta": {
         "range": [1002, 1028],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 56,
         "columnno": 8,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -386,7 +386,7 @@
     "comment": "",
     "meta": {
         "range": [1039, 1233],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 59,
         "columnno": 8,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -405,7 +405,7 @@
 }, {
     "comment": "/**\n             * 点击事件\n             *\n             * @event click\n             * @property {Event} e 事件对象\n             */",
     "meta": {
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 61,
         "columnno": 12,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -426,8 +426,8 @@
 }, {
     "comment": "",
     "meta": {
-        "range": [1244, 1454],
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "range": [1244, 1503],
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 70,
         "columnno": 8,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -444,9 +444,9 @@
     "memberof": "module.exports.methods",
     "scope": "static"
 }, {
-    "comment": "/**\n             * 触摸开始事件\n             *\n             * @event touchstart\n             * @property {Event} e 事件对象\n             */",
+    "comment": "/**\n             * 触摸开始事件\n             *\n             * @event touchstart\n             * @property {Event} e 事件对象\n             * @property {string} str 字符串\n             */",
     "meta": {
-        "filename": "bs0zff6fcpiqazmobej2k.js",
+        "filename": "6s1vn4g44losdksbhc8zdh.js",
         "lineno": 72,
         "columnno": 12,
         "path": "/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T",
@@ -461,11 +461,17 @@
         },
         "description": "事件对象",
         "name": "e"
+    }, {
+        "type": {
+            "names": ["string"]
+        },
+        "description": "字符串",
+        "name": "str"
     }],
     "longname": "event:touchstart",
     "scope": "global"
 }, {
     "kind": "package",
     "longname": "package:undefined",
-    "files": ["/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T/bs0zff6fcpiqazmobej2k.js"]
+    "files": ["/var/folders/8l/qdhnfvy52rd1jt77_dnz0ghw0000gn/T/6s1vn4g44losdksbhc8zdh.js"]
 }]
