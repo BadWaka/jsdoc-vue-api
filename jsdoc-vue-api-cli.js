@@ -2,6 +2,7 @@
 const path = require('path');
 const jsdocVueApi = require('./src/jsdoc-vue-api');
 console.log('jsdoc-vue-api-cli', 'process.argv', process.argv);
+console.log('当前进程的工作目录', process.cwd());
 
 /**
  * vue 文件路径
@@ -21,9 +22,7 @@ console.log('vueFilePath', vueFilePath);
 let readmeDirPath = process.argv[3];
 // 如果没有，就在 .vue 文件当前目录下创建
 if (!readmeDirPath) {
-    let vueFilePathArr = vueFilePath.split('/');
-    vueFilePathArr.splice(vueFilePathArr.length - 1, 1);
-    readmeDirPath = vueFilePathArr.join('/');
+    readmeDirPath = path.dirname(vueFilePath)
 }
 readmeDirPath = path.resolve(__dirname, readmeDirPath);
 console.log('readmeDirPath', readmeDirPath);
