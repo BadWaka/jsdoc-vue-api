@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 const path = require('path');
-const jsdocVueApi = require('./jsdoc-vue-api');
+const jsdocVueApi = require('./src/jsdoc-vue-api');
 console.log('jsdoc-vue-api-cli', 'process.argv', process.argv);
 
 /**
