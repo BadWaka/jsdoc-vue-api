@@ -6,3 +6,6 @@ amd-lock.json
 package-lock.json
 dist
 test/README.md
+test/sfcObj.json
+test/jsdocObj.json
+test/docObj.json
