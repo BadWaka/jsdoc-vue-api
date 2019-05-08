@@ -5,15 +5,13 @@
         @click="onClick"
         @touchstart="onTouchStart"
     >
-        test
+        test2
         <!-- @slot 容器 -->
         <slot/>
     </div>
 </template>
 
 <script>
-import test2 from './test2.vue';
-
 export default {
     props: {
         /**

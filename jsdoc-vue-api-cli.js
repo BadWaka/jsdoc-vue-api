@@ -7,7 +7,6 @@ const packageJson = require('./package.json');
 // 获得传入的第三个参数
 // process.argv 第一个参数是 node 可执行文件，第二个参数是被执行的 jsdoc-vue-api-cli.js，从第三个参数开始，才是真正用户传入的
 let arvg2 = process.argv[2];
-console.log('arvg2', arvg2, 'path.extname(arvg2)', path.extname(arvg2));
 
 // 查看帮助信息
 if (!arvg2 || arvg2 === '-h' || arvg2 === '--help') {
@@ -19,6 +18,11 @@ if (!arvg2 || arvg2 === '-h' || arvg2 === '--help') {
 if (arvg2 === '-V' || arvg2 === '--version') {
     console.log(`${packageJson.version}`);
     return;
+}
+
+// 不是 .vue 文件
+if (path.extname(arvg2) !== '.vue') {
+    throw 'not vue file';
 }
 
 // vue 文件，进行转换操作
@@ -57,7 +61,7 @@ function handleVueFile() {
     }
     // 得到绝对路径
     vueFilePath = path.resolve(process.cwd(), vueFilePath);
-    console.log('vueFilePath', vueFilePath);
+    console.log('.vue 文件路径 vueFilePath', vueFilePath);
 
     /**
      * readme 文件存放路径
@@ -68,12 +72,12 @@ function handleVueFile() {
         readmeDirPath = path.dirname(vueFilePath)
     }
     readmeDirPath = path.resolve(process.cwd(), readmeDirPath);
-    console.log('readmeDirPath', readmeDirPath);
+    console.log('文档文件夹路径 readmeDirPath', readmeDirPath);
 
     // 得到文档数据对象
     let docObj = jsdocVueApi.parseVue(vueFilePath);
 
     // 写入 markdown
-    jsdocVueApi.writeMD(docObj, readmeDirPath);
+    // jsdocVueApi.writeMD(docObj, readmeDirPath);
 }
 

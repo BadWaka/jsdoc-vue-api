@@ -7,7 +7,8 @@
     "jva": "jsdoc-vue-api-cli.js"
   },
   "scripts": {
-    "compile": "babel src/index.js --out-file dist/index.js && babel src/getDocObj.js --out-file dist/getDocObj.js"
+    "compile": "babel src/index.js --out-file dist/index.js && babel src/getDocObj.js --out-file dist/getDocObj.js",
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,6 @@
   },
   "homepage": "https://github.com/BadWaka/jsdoc-vue-api#readme",
   "dependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.4",
     "chalk": "^2.4.2",
     "jsdoc-api": "^4.0.3",
     "vue-template-compiler": "^2.6.10"

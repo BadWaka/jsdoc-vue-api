@@ -5,17 +5,56 @@ const jsdocApi = require('jsdoc-api');
 const fs = require('fs');
 const path = require('path');
 const vueTemplateCompiler = require('vue-template-compiler');
-const babel = require('@babel/core');
+
+/**
+ * 解析 .vue 文件
+ *
+ * @param {string} vueFilePath 要解析的 .vue 文件路径
+ *
+ * @return {Object} docObj 分类清晰的 json object，可以直接读取 props、events、methods
+ */
+function parseVue(vueFilePath) {
+
+    // 转换成绝对路径
+    vueFilePath = path.resolve(__dirname, vueFilePath);
+
+    // 判断是否 .vue 文件
+    let extname = path.extname(vueFilePath);
+    if (extname !== '.vue') {
+        throw 'not vue file';
+    }
+
+    // vue 文件内容字符串
+    let fileStr = fs.readFileSync(vueFilePath, 'utf8');
+
+    // 使用 vue-template-compiler 编译 .vue 单文件组件，得到各个部分的代码；.template 模板；.script 脚本；.styles 样式
+    let sfcObj = vueTemplateCompiler.parseComponent(fileStr);
+    fs.writeFile('./test/sfcObj.json', JSON.stringify(sfcObj), () => {});
+
+    // 得到 js 可执行代码
+    let jsCode = sfcObj.script.content;
+
+    // 用 jsdoc-api 解析，得到 jsdoc 解析结果对象
+    let jsdocObj = jsdocApi.explainSync({
+        source: jsCode
+    });
+    fs.writeFile('./test/jsdocObj.json', JSON.stringify(jsdocObj), () => {});
+
+    // 得到最后输出的对象
+    let docObj = getDocObj(jsdocObj);
+    fs.writeFile('./test/docObj.json', JSON.stringify(docObj), () => {});
+
+    return docObj;
+}
 
 /**
  * 对数据进行处理，得到描述文档的 JSON object
  *
- * @param {Object} jsObj js 代码本体的对象
  * @param {Object} jsdocObj jsdoc-api 解析出来的对象
  *
  * @return {Object} docObj 分类清晰的 json object，可以直接读取 props、events、methods
  */
-const getDocObj = (jsObj, jsdocObj) => {
+function getDocObj(jsdocObj) {
 
     let docObj = {
         props: {},
@@ -124,66 +163,7 @@ const getDocObj = (jsObj, jsdocObj) => {
     });
 
     return docObj;
-};
-
-/**
- * 解析 .vue 文件
- *
- * @param {string} filePath 要解析的 .vue 文件路径
- *
- * @return {Object} docObj 分类清晰的 json object，可以直接读取 props、events、methods
- */
-const parseVue = (filePath) => {
-
-    // 转换成绝对路径
-    filePath = path.resolve(__dirname, filePath);
-
-    // 判断是否 .vue 文件
-    let extname = path.extname(filePath);
-    if (extname !== '.vue') {
-        console.error('不是 .vue 文件');
-        return null;
-    }
-
-    // vue 文件内容字符串
-    let fileStr = fs.readFileSync(filePath, 'utf8');
-
-    // 使用 vue-template-compiler 编译 .vue 单文件组件
-    let sfcObj = vueTemplateCompiler.parseComponent(fileStr);
-    // sfcObj.template 模板
-    // sfcObj.script 脚本
-    // sfcObj.styles 样式
-
-    // 用 eval 执行 js 部分，得到 js 对象
-    sfcObj.script.content = sfcObj.script.content.replace(/import /g, '// import ');
-    sfcObj.script.content = sfcObj.script.content.replace(/'c-/g, '//\'c-');
-    let jsObj = eval(babel.transformSync(sfcObj.script.content).code);
-    // fs.writeFile('./test/jsObj.json', JSON.stringify(jsObj), (err) => {
-    //     if (err) {
-    //         console.log('err', err);
-    //     }
-    // });
-
-    // 用 jsdoc-api 解析，得到 jsdoc 解析结果对象
-    let jsdocObj = jsdocApi.explainSync({
-        source: sfcObj.script.content
-    });
-    // fs.writeFile('./test/jsdocObj.json', JSON.stringify(jsdocObj), (err) => {
-    //     if (err) {
-    //         console.log('err', err);
-    //     }
-    // });
-
-    // 得到最后输出的对象
-    let docObj = getDocObj(jsObj, jsdocObj);
-    // fs.writeFile('./test/docObj.json', JSON.stringify(docObj), (err) => {
-    //     if (err) {
-    //         console.log('err', err);
-    //     }
-    // });
-
-    return docObj;
-};
+}
 
 /**
  * 写入 markdown
@@ -192,7 +172,7 @@ const parseVue = (filePath) => {
  * @param {string} dirPath 文件夹路径
  * @param {string} name 文档名
  */
-const writeMD = (docObj, dirPath, name) => {
+function writeMD(docObj, dirPath, name) {
 
     // 转换成绝对路径
     dirPath = path.resolve(__dirname, dirPath);
@@ -285,7 +265,7 @@ const writeMD = (docObj, dirPath, name) => {
         // }
     });
 
-};
+}
 
 module.exports = {
     parseVue,
