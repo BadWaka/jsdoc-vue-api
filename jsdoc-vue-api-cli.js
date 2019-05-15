@@ -78,6 +78,6 @@ function handleVueFile() {
     let docObj = jsdocVueApi.parseVue(vueFilePath);
 
     // 写入 markdown
-    // jsdocVueApi.writeMD(docObj, readmeDirPath);
+    jsdocVueApi.writeMD(docObj, readmeDirPath);
 }
 
