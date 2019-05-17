@@ -4,7 +4,15 @@
 const jsdocApi = require('jsdoc-api');
 const fs = require('fs');
 const path = require('path');
+const util = require('util');
 const vueTemplateCompiler = require('vue-template-compiler');
+
+const readFile = util.promisify(fs.readFile);
+const writeFile = util.promisify(fs.writeFile);
+const appendFile = util.promisify(fs.appendFile);
+
+// 追加暗号，每次重新执行的时候，会覆盖掉暗号以下的部分
+const appendCipher = '[//]: # (append cipher)';
 
 /**
  * 解析 .vue 文件
@@ -29,7 +37,6 @@ function parseVue(vueFilePath) {
 
     // 使用 vue-template-compiler 编译 .vue 单文件组件，得到各个部分的代码；.template 模板；.script 脚本；.styles 样式
     let sfcObj = vueTemplateCompiler.parseComponent(fileStr);
-    fs.writeFile('./test/sfcObj.json', JSON.stringify(sfcObj), () => {});
 
     // 得到 js 可执行代码
     let jsCode = sfcObj.script.content;
@@ -38,11 +45,9 @@ function parseVue(vueFilePath) {
     let jsdocObj = jsdocApi.explainSync({
         source: jsCode
     });
-    fs.writeFile('./test/jsdocObj.json', JSON.stringify(jsdocObj), () => {});
 
     // 得到最后输出的对象
     let docObj = getDocObj(jsdocObj);
-    fs.writeFile('./test/docObj.json', JSON.stringify(docObj), () => {});
 
     return docObj;
 }
@@ -70,7 +75,6 @@ function getDocObj(jsdocObj) {
 
             // props
             if (commentItem.memberof === 'module.exports.props') {
-                // console.log('commentItem.meta.code', commentItem.meta.code);
                 let metaCodeValue = commentItem.meta.code.value;
                 if (typeof commentItem.meta.code.value === 'object') {
                     metaCodeValue = JSON.parse(commentItem.meta.code.value);
@@ -172,17 +176,16 @@ function getDocObj(jsdocObj) {
  * @param {string} dirPath 文件夹路径
  * @param {string} name 文档名
  */
-function writeMD(docObj, dirPath, name) {
+async function writeMD(docObj, dirPath, name) {
 
     // 转换成绝对路径
     dirPath = path.resolve(__dirname, dirPath);
-    console.log('文件夹路径', dirPath);
 
     // .md 文件的路径
     let mdPath = `${dirPath}/README.md`;
 
     // .md 文件的内容
-    let mdContent = `# ${name}\n\n## API\n`;
+    let mdContent = `${appendCipher}\n\n# ${name}\n\n## API\n`;
 
     // Props
     if (docObj.props) {
@@ -233,38 +236,22 @@ function writeMD(docObj, dirPath, name) {
         }
     }
 
-    fs.readFile(mdPath, 'utf8', (err, data) => {
-        // 文件不存在
-        // if (err) {
-        fs.writeFile(mdPath, mdContent, 'utf8', () => {
-            console.log('没有 README.md，写入成功');
-        });
-        // }
-        // 文件存在
-        // else {
-        //     // 每次会重新覆盖掉 ## API 以下的部分
-        //     let index = data.indexOf('----------');
-        //     console.log('index', index, 'data', data.charAt(index));
-        //     if (index === -1) {
-        //         // 追加文件
-        //         fs.appendFile(mdPath, mdContent, 'utf8', () => {
-        //             console.log('有 README.md，写入成功');
-        //         });
-        //     }
-        //     else {
-        //         fs.truncate(mdPath, index + 100, (err) => {
-        //             if (!err) {
-        //                 console.log('删除成功');
-        //             }
-        //             // 追加文件
-        //             // fs.appendFile(mdPath, mdContent, 'utf8', () => {
-        //             //     console.log('有 README.md，写入成功');
-        //             // });
-        //         });
-        //     }
-        // }
-    });
-
+    try {
+        let md = await readFile(mdPath, 'utf8');
+        let index = md.indexOf(appendCipher);
+        console.log('有 README.md', index);
+        md = md.substring(0, index);
+        await writeFile(mdPath, md + mdContent);
+        console.log('追加成功');
+    }
+    catch (err) {
+        console.error(err);
+        if (err.errno === -2) {
+            console.log('没有 README.md');
+            await writeFile(mdPath, mdContent);
+            console.log('写入成功');
+        }
+    }
 }
 
 module.exports = {
