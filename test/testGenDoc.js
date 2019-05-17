@@ -1,4 +1,4 @@
-const jsdocVueApi = require('./jsdoc-vue-api');
+const jsdocVueApi = require('../src/jsdoc-vue-api');
 const fs = require('fs');
 const path = require('path');
 
