@@ -1,4 +1,4 @@
-# Cascader
+[//]: # (不要删除！每次重新生成文档的时候，会覆盖掉此以下的部分)
 
 ## API
 
@@ -44,3 +44,9 @@ param1.option.value | string | 当前选中项的值
 param1.options | Array | 当前列的所有项，类型同 param1.option
 
 ### Methods
+
+**init**: 初始化
+
+
+**cascaderRecursion**: 级联选择器递归
+
