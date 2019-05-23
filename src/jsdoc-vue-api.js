@@ -238,7 +238,6 @@ async function writeMD(docObj, dirPath) {
     try {
         let md = await readFile(mdPath, 'utf8');
         let index = md.indexOf(appendCipher);
-        console.log('有 README.md', index);
         md = md.substring(0, index);
         await writeFile(mdPath, md + mdContent);
         console.log('追加成功');
