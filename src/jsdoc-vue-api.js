@@ -17,8 +17,7 @@ const appendCipher = '[//]: # (不要删除！每次重新生成文档的时候�
  * 解析 .vue 文件
  *
  * @param {string} vueFilePath 要解析的 .vue 文件路径
- *
- * @return {Object} docObj 分类清晰的 json object，可以直接读取 props、events、methods
+ * @return {Object} docObj 分类清晰的 json object，可以直接读取 props、slots、events、methods
  */
 function parseVue(vueFilePath) {
 
@@ -207,7 +206,7 @@ function getDocObj(jsdocObj, templateCode) {
 /**
  * 写入 markdown
  *
- * @param {Object} docObj 分类清晰的 json object，可以直接读取 props、events、methods
+ * @param {Object} docObj 分类清晰的 json object，可以直接读取 props、slots、events、methods
  * @param {string} dirPath 文件夹路径
  */
 async function writeMD(docObj, dirPath) {
