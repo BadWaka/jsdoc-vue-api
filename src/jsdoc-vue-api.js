@@ -12,7 +12,7 @@ const writeFile = util.promisify(fs.writeFile);
 const appendFile = util.promisify(fs.appendFile);
 
 // 追加暗号，每次重新执行的时候，会覆盖掉暗号以下的部分
-const appendCipher = '[//]: # (append cipher)';
+const appendCipher = '[//]: # (不要删除！每次重新生成文档的时候，会覆盖掉此以下的部分)';
 
 /**
  * 解析 .vue 文件
