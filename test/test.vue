@@ -1,3 +1,4 @@
+<!-- @ignore -->
 <template>
     <!-- test vue -->
     <div
@@ -6,8 +7,13 @@
         @touchstart="onTouchStart"
     >
         test
-        <!-- @slot 容器 -->
+        <!-- @slot 按钮内容 -->
         <slot/>
+        <!-- @slot 按钮左边内容 -->
+        <slot name="left"/>
+        <!-- @slot 按钮右边内容 -->
+        <slot name="right">
+        </slot>
     </div>
 </template>
 

@@ -37,6 +37,9 @@ function parseVue(vueFilePath) {
     // 使用 vue-template-compiler 编译 .vue 单文件组件，得到各个部分的代码；.template 模板；.script 脚本；.styles 样式
     let sfcObj = vueTemplateCompiler.parseComponent(fileStr);
 
+    // 得到 template 代码；这里是为了得到 slot 的文档
+    let templateCode = sfcObj.template.content;
+
     // 得到 js 可执行代码
     let jsCode = sfcObj.script.content;
 
@@ -46,7 +49,7 @@ function parseVue(vueFilePath) {
     });
 
     // 得到最后输出的对象
-    let docObj = getDocObj(jsdocObj);
+    let docObj = getDocObj(jsdocObj, templateCode);
 
     return docObj;
 }
@@ -55,10 +58,11 @@ function parseVue(vueFilePath) {
  * 对数据进行处理，得到描述文档的 JSON object
  *
  * @param {Object} jsdocObj jsdoc-api 解析出来的对象
+ * @param {string} templateCode .vue 文件 template 模板代码
  *
  * @return {Object} docObj 分类清晰的 json object，可以直接读取 props、events、methods
  */
-function getDocObj(jsdocObj) {
+function getDocObj(jsdocObj, templateCode) {
 
     writeFile('a.json', JSON.stringify(jsdocObj));
 
@@ -68,6 +72,28 @@ function getDocObj(jsdocObj) {
         events: {},
         methods: {}
     };
+
+    // slots 相关
+    // 匹配 @slot 的正则，匹配出来每一个 slot
+    let slotRegExp = /@slot[\s\S]*?(?=\/(slot)*?\>)/g;
+    let slotRegExpMatch = templateCode.match(slotRegExp);
+    for (let i = 0; i < slotRegExpMatch.length; i++) {
+        let tmpStr = slotRegExpMatch[i];
+        // 拿到描述
+        let desc = tmpStr.match(/@slot[\s\S]*?(?=\-\-\>)/)[0].replace('@slot', '').trim();
+        // 拿到 name
+        let nameMatch = tmpStr.match(/name="[\s\S]*?(?=")/);
+        // 如果没有 name，则为 default
+        let name = 'default';
+        if (nameMatch) {
+            name = nameMatch[0].replace('name="', '');
+        }
+        // 放入 slots
+        docObj.slots[name] = {
+            name,
+            desc
+        };
+    }
 
     jsdocObj.forEach((commentItem, commentIndex) => {
 
@@ -204,6 +230,17 @@ async function writeMD(docObj, dirPath) {
                     });
                 }
             }
+        }
+    }
+
+    // Slots
+    if (docObj.slots) {
+        mdContent += '\n### Slots\n\n';
+        mdContent += '名称 | 描述\n';
+        mdContent += '--- | ---\n';
+        for (let key in docObj.slots) {
+            let slot = docObj.slots[key];
+            mdContent += `${key} | ${slot.desc}\n`;
         }
     }
 
