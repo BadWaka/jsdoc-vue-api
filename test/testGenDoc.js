@@ -12,6 +12,6 @@ fs.readdir(compsPath, (err, files) => {
     files.forEach((file, fileIndex) => {
         let compPath = `${compsPath}/${file}/${file}.vue`;
         let docObj = jsdocVueApi.parseVue(compPath, compsPath);
-        jsdocVueApi.writeMD(docObj, `${compsPath}/${file}`, file);
+        jsdocVueApi.writeMD(docObj, `${compsPath}/${file}`);
     });
 });

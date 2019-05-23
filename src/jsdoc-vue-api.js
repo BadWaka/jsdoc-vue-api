@@ -174,9 +174,8 @@ function getDocObj(jsdocObj) {
  *
  * @param {Object} docObj 分类清晰的 json object，可以直接读取 props、events、methods
  * @param {string} dirPath 文件夹路径
- * @param {string} name 文档名
  */
-async function writeMD(docObj, dirPath, name) {
+async function writeMD(docObj, dirPath) {
 
     // 转换成绝对路径
     dirPath = path.resolve(__dirname, dirPath);
@@ -185,7 +184,7 @@ async function writeMD(docObj, dirPath, name) {
     let mdPath = `${dirPath}/README.md`;
 
     // .md 文件的内容
-    let mdContent = `${appendCipher}\n\n# ${name}\n\n## API\n`;
+    let mdContent = `${appendCipher}\n\n## API\n`;
 
     // Props
     if (docObj.props) {
