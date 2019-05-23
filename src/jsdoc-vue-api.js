@@ -82,22 +82,25 @@ function getDocObj(jsdocObj, templateCode) {
     // 匹配 @slot 的正则，匹配出来每一个 slot
     let slotRegExp = /@slot[\s\S]*?(?=\/(slot)*?\>)/g;
     let slotRegExpMatch = templateCode.match(slotRegExp);
-    for (let i = 0; i < slotRegExpMatch.length; i++) {
-        let tmpStr = slotRegExpMatch[i];
-        // 拿到描述
-        let desc = tmpStr.match(/@slot[\s\S]*?(?=\-\-\>)/)[0].replace('@slot', '').trim();
-        // 拿到 name
-        let nameMatch = tmpStr.match(/name="[\s\S]*?(?=")/);
-        // 如果没有 name，则为 default
-        let name = 'default';
-        if (nameMatch) {
-            name = nameMatch[0].replace('name="', '');
+    // 如果没有 @slot 容错
+    if (slotRegExpMatch) {
+        for (let i = 0; i < slotRegExpMatch.length; i++) {
+            let tmpStr = slotRegExpMatch[i];
+            // 拿到描述
+            let desc = tmpStr.match(/@slot[\s\S]*?(?=\-\-\>)/)[0].replace('@slot', '').trim();
+            // 拿到 name
+            let nameMatch = tmpStr.match(/name="[\s\S]*?(?=")/);
+            // 如果没有 name，则为 default
+            let name = 'default';
+            if (nameMatch) {
+                name = nameMatch[0].replace('name="', '');
+            }
+            // 放入 slots
+            docObj.slots[name] = {
+                name,
+                desc
+            };
         }
-        // 放入 slots
-        docObj.slots[name] = {
-            name,
-            desc
-        };
     }
 
     jsdocObj.forEach((commentItem, commentIndex) => {
