@@ -28,11 +28,18 @@ function parseVue(vueFilePath) {
     // 判断是否 .vue 文件
     let extname = path.extname(vueFilePath);
     if (extname !== '.vue') {
-        throw 'not vue file';
+        console.error('vueFilePath', vueFilePath);
+        throw 'not vue file 给我一个 .vue 文件兄dei';
     }
 
     // vue 文件内容字符串
     let fileStr = fs.readFileSync(vueFilePath, 'utf8');
+    let ignoreMatch = fileStr.match(/@ignore[\s\S]*?(?=\<template\>)/);
+    // 如果 <template> 标签之前注明了 @ignore，则代表用户不希望生成这个文件的文档
+    if (ignoreMatch) {
+        console.error(`${vueFilePath} 该文件被忽略`);
+        return null;
+    }
 
     // 使用 vue-template-compiler 编译 .vue 单文件组件，得到各个部分的代码；.template 模板；.script 脚本；.styles 样式
     let sfcObj = vueTemplateCompiler.parseComponent(fileStr);
@@ -63,8 +70,6 @@ function parseVue(vueFilePath) {
  * @return {Object} docObj 分类清晰的 json object，可以直接读取 props、events、methods
  */
 function getDocObj(jsdocObj, templateCode) {
-
-    writeFile('a.json', JSON.stringify(jsdocObj));
 
     let docObj = {
         props: {},
@@ -203,6 +208,11 @@ function getDocObj(jsdocObj, templateCode) {
  * @param {string} dirPath 文件夹路径
  */
 async function writeMD(docObj, dirPath) {
+
+    if (!docObj) {
+        console.error('写入文件错误，docObj 不存在');
+        return false;
+    }
 
     // 转换成绝对路径
     dirPath = path.resolve(__dirname, dirPath);

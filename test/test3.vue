@@ -1,3 +1,4 @@
+<!-- @ignore -->
 <template>
     <!-- test vue -->
     <div
@@ -5,20 +6,13 @@
         @click="onClick"
         @touchstart="onTouchStart"
     >
-        test
-        <!-- @slot 按钮内容123 -->
+        test2
+        <!-- @slot 容器 -->
         <slot/>
-        <!-- @slot 按钮左边内容 -->
-        <slot name="left"/>
-        <!-- @slot 按钮右边内容 -->
-        <slot name="right">
-        </slot>
     </div>
 </template>
 
 <script>
-import test2 from './test2.vue';
-
 export default {
     props: {
         /**
