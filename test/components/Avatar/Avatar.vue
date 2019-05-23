@@ -9,6 +9,7 @@
         }"
         class="avatar"
     >
+        <!-- @slot 基础 slot -->
         <slot/>
     </view>
 </template>

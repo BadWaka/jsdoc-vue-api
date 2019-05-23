@@ -9,7 +9,6 @@ const vueTemplateCompiler = require('vue-template-compiler');
 
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
-const appendFile = util.promisify(fs.appendFile);
 
 // 追加暗号，每次重新执行的时候，会覆盖掉暗号以下的部分
 const appendCipher = '[//]: # (不要删除！每次重新生成文档的时候，会覆盖掉此以下的部分)';
@@ -60,6 +59,8 @@ function parseVue(vueFilePath) {
  * @return {Object} docObj 分类清晰的 json object，可以直接读取 props、events、methods
  */
 function getDocObj(jsdocObj) {
+
+    writeFile('a.json', JSON.stringify(jsdocObj));
 
     let docObj = {
         props: {},
@@ -193,12 +194,15 @@ async function writeMD(docObj, dirPath) {
         mdContent += '--- | --- | --- | --- | --- | ---\n';
         for (let key in docObj.props) {
             let prop = docObj.props[key];
-            mdContent += `${key} | ${prop.type} | ${prop.defaultValue || ''} | ${prop.required ? '是' : '否'} | ${prop.description} | ---\n`;
-            // 判断每个 prop 是否有 properties 属性
-            if (prop.properties) {
-                prop.properties.forEach((propertie, propertieIndex) => {
-                    mdContent += `>> ${propertie.name} | ${propertie.type} | ${propertie.defaultvalue || ''} | ${propertie.required ? '是' : '否'} | ${propertie.description} | ---\n`;
-                });
+            // 不忽略的写入文档
+            if (!prop.ignore) {
+                mdContent += `${key} | ${prop.type} | ${prop.defaultValue || ''} | ${prop.required ? '是' : '否'} | ${prop.description} | ---\n`;
+                // 判断每个 prop 是否有 properties 属性
+                if (prop.properties) {
+                    prop.properties.forEach((propertie, propertieIndex) => {
+                        mdContent += `>> ${propertie.name} | ${propertie.type} | ${propertie.defaultvalue || ''} | ${propertie.required ? '是' : '否'} | ${propertie.description} | ---\n`;
+                    });
+                }
             }
         }
     }
