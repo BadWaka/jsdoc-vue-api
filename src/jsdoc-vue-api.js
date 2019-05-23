@@ -240,14 +240,13 @@ async function writeMD(docObj, dirPath) {
         let index = md.indexOf(appendCipher);
         md = md.substring(0, index);
         await writeFile(mdPath, md + mdContent);
-        console.log('追加成功');
+        // console.log('追加成功');
     }
     catch (err) {
         console.error(err);
         if (err.errno === -2) {
-            console.log('没有 README.md');
             await writeFile(mdPath, mdContent);
-            console.log('写入成功');
+            // console.log('没有 README.md, 写入成功');
         }
     }
 }
