@@ -70,7 +70,7 @@ function parseVue(vueFilePath) {
  */
 function getDocObj(jsdocObj, templateCode) {
 
-    writeFile('b.json', JSON.stringify(jsdocObj));
+    // writeFile('b.json', JSON.stringify(jsdocObj));
 
     let docObj = {
         props: {},

@@ -8,5 +8,5 @@ const writeFile = util.promisify(fs.writeFile);
 // TODO: test
 let test = path.resolve(__dirname, './test.vue');
 let docObj = jsdocVueApi.parseVue(test);
-writeFile('a.json', JSON.stringify(docObj));
+// writeFile('a.json', JSON.stringify(docObj));
 jsdocVueApi.writeMD(docObj, path.resolve(__dirname, './'));
