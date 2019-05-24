@@ -70,6 +70,8 @@ function parseVue(vueFilePath) {
  */
 function getDocObj(jsdocObj, templateCode) {
 
+    writeFile('b.json', JSON.stringify(jsdocObj));
+
     let docObj = {
         props: {},
         slots: {},
@@ -109,14 +111,16 @@ function getDocObj(jsdocObj, templateCode) {
 
             // props
             if (commentItem.memberof === 'module.exports.props') {
+                let defaultValue = undefined;
+                let required = false;
                 let metaCodeValue = commentItem.meta.code.value;
-                if (typeof commentItem.meta.code.value === 'object') {
-                    metaCodeValue = JSON.parse(commentItem.meta.code.value);
+                if (metaCodeValue) {
+                    metaCodeValueObj = JSON.parse(metaCodeValue);
+                    // 获取默认值
+                    defaultValue = metaCodeValueObj.default;
+                    // 获取是否必须
+                    required = metaCodeValueObj.required;
                 }
-                // 获取默认值
-                let defaultValue = metaCodeValue.default;
-                // 获取是否必须
-                let required = metaCodeValue.required;
                 // 获取子属性
                 let properties = null;
                 if (commentItem.properties) {
