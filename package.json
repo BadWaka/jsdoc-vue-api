@@ -1,6 +1,6 @@
 {
   "name": "jsdoc-vue-api",
-  "version": "1.0.20",
+  "version": "1.0.19",
   "description": "jsdoc vue api",
   "main": "src/jsdoc-vue-api.js",
   "bin": {
