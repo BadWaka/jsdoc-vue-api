@@ -115,11 +115,16 @@ function getDocObj(jsdocObj, templateCode) {
                 let required = false;
                 let metaCodeValue = commentItem.meta.code.value;
                 if (metaCodeValue) {
-                    metaCodeValueObj = JSON.parse(metaCodeValue);
-                    // 获取默认值
-                    defaultValue = metaCodeValueObj.default;
-                    // 获取是否必须
-                    required = metaCodeValueObj.required;
+                    try {
+                        metaCodeValueObj = JSON.parse(metaCodeValue);
+                        // 获取默认值
+                        defaultValue = metaCodeValueObj.default;
+                        // 获取是否必须
+                        required = metaCodeValueObj.required;
+                    }
+                    catch(err) {
+                        console.error('metaCodeValue', metaCodeValue, err);
+                    }
                 }
                 // 获取子属性
                 let properties = null;
