@@ -31,5 +31,6 @@ node test/test.js
 ## 发布包
 
 ```
+npm version 1.0.XX
 npm publish --registry https://registry.npmjs.org/
 ```

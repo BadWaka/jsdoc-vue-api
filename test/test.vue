@@ -45,6 +45,28 @@ export default {
         prop2: {
             type: String,
             default: '测试属性22222222'
+        },
+
+        /**
+         * Boolean 参数
+         */
+        propBoolean: {
+            type: Boolean,
+            default: false
+        },
+
+        /**
+         * Object 参数
+         *
+         * @property {boolean} a 属性 a
+         * @property {string} b 属性 b
+         */
+        propObject: {
+            type: Object,
+            default: {
+                a: true,
+                b: '123'
+            }
         }
     },
     data() {

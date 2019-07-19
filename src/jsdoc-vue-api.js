@@ -243,7 +243,21 @@ async function writeMD(docObj, dirPath) {
             let prop = docObj.props[key];
             // 不忽略的写入文档
             if (!prop.ignore) {
-                mdContent += `${key} | ${prop.type} | ${prop.defaultValue || ''} | ${prop.required ? '是' : '否'} | ${prop.description} | ---\n`;
+                if (prop.defaultValue || prop.defaultValue === false) {
+                    if (typeof prop.defaultValue === 'string') {
+                        prop.defaultValueShow = `'${prop.defaultValue}'`;
+                    }
+                    else if (typeof prop.defaultValue === 'number') {
+                        prop.defaultValueShow = `${prop.defaultValue}`;
+                    }
+                    else if (typeof prop.defaultValue === 'boolean') {
+                        prop.defaultValueShow = `${prop.defaultValue}`;
+                    }
+                    else {
+                        prop.defaultValueShow = '';
+                    }
+                }
+                mdContent += `${key} | ${prop.type} | ${prop.defaultValueShow || ''} | ${prop.required ? '是' : '否'} | ${prop.description} | ---\n`;
                 // 判断每个 prop 是否有 properties 属性
                 if (prop.properties) {
                     prop.properties.forEach((propertie, propertieIndex) => {
